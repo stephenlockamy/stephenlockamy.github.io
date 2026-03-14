@@ -99,7 +99,52 @@
     .ig-embed-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; align-items: start; }
     .ig-wrap { width: 100%; overflow: hidden; min-width: 0; }
     .ig-wrap .instagram-media { min-width: 0 !important; width: 100% !important; max-width: 100% !important; margin: 0 !important; }
+    .web-tabs { display: flex; gap: 4px; margin-bottom: 2rem; border-bottom: 1px solid var(--gray-1); padding-bottom: 0; }
+    .web-tab { background: none; border: none; padding: 0.75rem 1.25rem; font-family: var(--sans); font-size: 13px; font-weight: 400; color: var(--gray-3); cursor: pointer; border-bottom: 2px solid transparent; margin-bottom: -1px; transition: color 0.2s, border-color 0.2s; }
+    .web-tab:hover { color: var(--black); }
+    .web-tab.active { color: var(--black); border-bottom-color: var(--amber); font-weight: 500; }
     .web-page-list { display: flex; flex-direction: column; gap: 3rem; }
+
+    .web-swipe-dots { display: none; justify-content: center; gap: 8px; margin-top: 1.5rem; }
+    .web-swipe-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--gray-2); border: none; padding: 0; cursor: pointer; transition: background 0.2s; }
+    .web-swipe-dot.active { background: var(--amber); }
+
+    @media (max-width: 768px) {
+      .web-tabs { display: none; }
+      .web-swipe-dots { display: flex; }
+      .web-page-list {
+        display: flex;
+        flex-direction: row;
+        gap: 0;
+        overflow: hidden;
+        perspective: 1200px;
+        position: relative;
+        min-height: 200px;
+      }
+      .web-page-item {
+        min-width: 100%;
+        flex-shrink: 0;
+        transition: transform 0.5s ease, opacity 0.5s ease;
+        transform-origin: center center;
+        backface-visibility: hidden;
+      }
+      .web-page-item.slide-out-left {
+        transform: translateX(-100%) rotateY(15deg);
+        opacity: 0;
+        position: absolute;
+        top: 0; left: 0; width: 100%;
+      }
+      .web-page-item.slide-out-right {
+        transform: translateX(100%) rotateY(-15deg);
+        opacity: 0;
+        position: absolute;
+        top: 0; left: 0; width: 100%;
+      }
+      .web-page-item.slide-in {
+        transform: translateX(0) rotateY(0deg);
+        opacity: 1;
+      }
+    }
     .web-page-item { display: grid; grid-template-columns: 220px 1fr; gap: 2rem; align-items: start; }
     .web-page-label { font-size: 10px; font-weight: 500; letter-spacing: 0.13em; text-transform: uppercase; color: var(--amber); margin-bottom: 8px; }
     .web-page-title { font-family: var(--serif); font-size: 22px; font-weight: 500; line-height: 1.2; margin-bottom: 10px; }
@@ -328,8 +373,13 @@
         <p class="modal-desc">Landing pages built to convert — from athlete brand partnerships to product launches. Every page a cohesive narrative: headline, story, proof, and call to action.</p>
       </div>
       <div class="modal-body">
+        <div class="web-tabs">
+          <button class="web-tab active" data-page="pj">PJ Washington x BEDGEAR</button>
+          <button class="web-tab" data-page="sustainability">Sustainability</button>
+        </div>
         <div class="web-page-list">
-          <div class="web-page-item">
+
+          <div class="web-page-item" id="web-page-pj">
             <div>
               <div class="web-page-label">Brand partnership — athlete</div>
               <h3 class="web-page-title">PJ Washington x BEDGEAR</h3>
@@ -349,7 +399,7 @@
             </div>
           </div>
 
-          <div class="web-page-item">
+          <div class="web-page-item" id="web-page-sustainability" style="display:none;">
             <div>
               <div class="web-page-label">Brand storytelling</div>
               <h3 class="web-page-title">Sustainability</h3>
@@ -368,6 +418,11 @@
               </div>
             </div>
           </div>
+
+        </div>
+        <div class="web-swipe-dots">
+          <button class="web-swipe-dot active" data-index="0"></button>
+          <button class="web-swipe-dot" data-index="1"></button>
         </div>
       </div>
     </div>
@@ -394,6 +449,64 @@
   </div>
 
   <script>
+    // Web page tabs (desktop) + swipe (mobile)
+    const webPages = Array.from(document.querySelectorAll('.web-page-item'));
+    const webTabs = document.querySelectorAll('.web-tab');
+    const swipeDots = document.querySelectorAll('.web-swipe-dot');
+    let currentPage = 0;
+
+    function showPage(index, direction) {
+      const isMobile = window.innerWidth <= 768;
+      if (isMobile) {
+        const outClass = direction === 'left' ? 'slide-out-left' : 'slide-out-right';
+        const current = webPages[currentPage];
+        const next = webPages[index];
+        current.classList.add(outClass);
+        next.style.display = 'grid';
+        next.style.opacity = '0';
+        next.style.transform = direction === 'left' ? 'translateX(100%) rotateY(-15deg)' : 'translateX(-100%) rotateY(15deg)';
+        requestAnimationFrame(() => {
+          requestAnimationFrame(() => {
+            next.classList.add('slide-in');
+            next.style.transform = '';
+            next.style.opacity = '';
+          });
+        });
+        setTimeout(() => {
+          current.classList.remove(outClass);
+          current.style.display = 'none';
+        }, 500);
+      } else {
+        webPages.forEach(p => p.style.display = 'none');
+        webPages[index].style.display = 'grid';
+      }
+      webTabs.forEach(t => t.classList.remove('active'));
+      swipeDots.forEach(d => d.classList.remove('active'));
+      if (webTabs[index]) webTabs[index].classList.add('active');
+      if (swipeDots[index]) swipeDots[index].classList.add('active');
+      currentPage = index;
+    }
+
+    webTabs.forEach((tab, i) => {
+      tab.addEventListener('click', () => showPage(i, i > currentPage ? 'left' : 'right'));
+    });
+
+    swipeDots.forEach((dot, i) => {
+      dot.addEventListener('click', () => showPage(i, i > currentPage ? 'left' : 'right'));
+    });
+
+    // Touch swipe
+    let touchStartX = 0;
+    const webModal = document.getElementById('modal-web');
+    webModal.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; }, { passive: true });
+    webModal.addEventListener('touchend', e => {
+      const diff = touchStartX - e.changedTouches[0].clientX;
+      if (Math.abs(diff) > 50) {
+        if (diff > 0 && currentPage < webPages.length - 1) showPage(currentPage + 1, 'left');
+        if (diff < 0 && currentPage > 0) showPage(currentPage - 1, 'right');
+      }
+    }, { passive: true });
+
     const hamburger = document.getElementById('hamburger');
     const mobileMenu = document.getElementById('mobile-menu');
     hamburger.addEventListener('click', () => { hamburger.classList.toggle('open'); mobileMenu.classList.toggle('open'); });
