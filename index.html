@@ -704,7 +704,6 @@
       backdrops.forEach(b => b.classList.remove('open'));
       document.body.style.overflow = '';
       modalControls.classList.remove('visible');
-      // Reset Instagram embeds to prevent background crash on close
       const grid = document.getElementById('ig-grid');
       if (grid && !window._igPending) {
         grid.querySelectorAll('.ig-wrap').forEach(wrap => {
@@ -716,6 +715,10 @@
             wrap.dataset.src = src;
           }
         });
+        // Remove the Instagram script entirely so it stops running
+        const igScript = document.querySelector('script[src*="instagram.com/embed"]');
+        if (igScript) igScript.parentNode.removeChild(igScript);
+        window.instgrm = undefined;
         window._igPending = true;
       }
     }
