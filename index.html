@@ -119,6 +119,7 @@
     .web-tab.active { color: var(--black); border-bottom-color: var(--amber); font-weight: 500; }
     .web-page-list { display: flex; flex-direction: column; gap: 3rem; }
     .web-page-item { display: grid; grid-template-columns: 220px 1fr; gap: 2rem; align-items: start; }
+    .web-page-item > div:first-child { position: sticky; top: 1rem; }
     .web-page-label { font-size: 10px; font-weight: 500; letter-spacing: 0.13em; text-transform: uppercase; color: var(--amber); margin-bottom: 8px; }
     .web-page-title { font-family: var(--serif); font-size: 22px; font-weight: 500; line-height: 1.2; margin-bottom: 10px; }
     .web-page-desc { font-size: 13px; color: var(--gray-4); line-height: 1.7; margin-bottom: 1rem; }
@@ -215,7 +216,7 @@
         <div class="cat-info">
           <div class="cat-label">Campaign</div>
           <div class="cat-title">Paid media</div>
-          <div class="cat-sub">Meta, digital, full-funnel</div>
+          <div class="cat-sub">Meta, Google, CTV</div>
           <div class="cat-arrow">&#8594; View work</div>
         </div>
       </div>
@@ -225,7 +226,7 @@
         <div class="cat-info">
           <div class="cat-label">Social</div>
           <div class="cat-title">Organic social</div>
-          <div class="cat-sub">Instagram, Facebook, TikTok</div>
+          <div class="cat-sub">Reels, stories, &amp; posts</div>
           <div class="cat-arrow">&#8594; View work</div>
         </div>
       </div>
@@ -243,9 +244,9 @@
         <div class="cat-bg bg-4"><!-- <img class="cat-img" src="web-cover.jpg" alt="Web"> --></div>
         <div class="cat-overlay"></div>
         <div class="cat-info">
-          <div class="cat-label">Web &amp; landing pages</div>
-          <div class="cat-title">Web</div>
-          <div class="cat-sub">P.J. Washington collab &amp; more</div>
+          <div class="cat-label">Digital marketing</div>
+          <div class="cat-title">Web &amp; Email</div>
+          <div class="cat-sub">Landing pages &amp; email campaigns</div>
           <div class="cat-arrow">&#8594; View work</div>
         </div>
       </div>
@@ -349,74 +350,116 @@
     <div class="modal modal-wide">
       <div class="modal-header">
         <button class="modal-close">&#x2715;</button>
-        <p class="modal-eyebrow">Web &amp; landing pages</p>
-        <h2 class="modal-title">Web</h2>
-        <p class="modal-desc">Landing pages built to convert — from athlete brand partnerships to product launches. Every page a cohesive narrative: headline, story, proof, and call to action.</p>
+        <p class="modal-eyebrow">Digital marketing</p>
+        <h2 class="modal-title">Web &amp; Email</h2>
+        <p class="modal-desc">Email? Me mail. I lead copywriting and brand storytelling across email campaigns designed to drive revenue and landing pages built to convert.</p>
       </div>
       <div class="modal-body">
-        <div class="web-page-list">
-
-          <div class="web-page-item">
-            <div>
-              <div class="web-page-label">Brand partnership — athlete</div>
-              <h3 class="web-page-title">P.J. Washington x BEDGEAR</h3>
-              <p class="web-page-desc">Dedicated landing page for partnership with NBA star athlete P.J. Washington. Integrated campaign across CTV, paid social, email, and in-store retail.</p>
-              <a class="web-page-link" href="https://www.bedgear.com/pages/pj" target="_blank" rel="noopener">Open live page &#8599;</a>
-            </div>
-            <div class="browser-frame">
-              <div class="browser-chrome">
-                <div class="browser-dots"><span class="dot dot-red"></span><span class="dot dot-yellow"></span><span class="dot dot-green"></span></div>
-                <div class="browser-url">bedgear.com/pages/pj</div>
-              </div>
-              <div class="browser-viewport">
-                <div class="browser-scroll">
-                  <img src="pj-washington1.jpg" alt="P.J. Washington x BEDGEAR landing page" style="width:100%; display:block;">
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="web-page-item">
-            <div>
-              <div class="web-page-label">Brand storytelling</div>
-              <h3 class="web-page-title">Sustainability</h3>
-              <p class="web-page-desc">Mission-driven brand page communicating BEDGEAR's commitment to responsible manufacturing and sustainable materials.</p>
-              <a class="web-page-link" href="https://www.bedgear.com/pages/sustainability" target="_blank" rel="noopener">Open live page &#8599;</a>
-            </div>
-            <div class="browser-frame">
-              <div class="browser-chrome">
-                <div class="browser-dots"><span class="dot dot-red"></span><span class="dot dot-yellow"></span><span class="dot dot-green"></span></div>
-                <div class="browser-url">bedgear.com/pages/sustainability</div>
-              </div>
-              <div class="browser-viewport">
-                <div class="browser-scroll">
-                  <img src="sustainability1.png" alt="BEDGEAR Sustainability page" style="width:100%; display:block;">
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="web-page-item">
-            <div>
-              <div class="web-page-label">Technology landing page</div>
-              <h3 class="web-page-title">Ver-Tex Technology</h3>
-              <p class="web-page-desc">Complex technology, simple story. This page translates the technical aspects of a proprietary cooling technology into clear, benefit-driven copy that's easy to digest.</p>
-              <a class="web-page-link" href="https://www.bedgear.com/pages/ver-tex" target="_blank" rel="noopener">Open live page &#8599;</a>
-            </div>
-            <div class="browser-frame">
-              <div class="browser-chrome">
-                <div class="browser-dots"><span class="dot dot-red"></span><span class="dot dot-yellow"></span><span class="dot dot-green"></span></div>
-                <div class="browser-url">bedgear.com/pages/ver-tex</div>
-              </div>
-              <div class="browser-viewport">
-                <div class="browser-scroll">
-                  <img src="ver-tex.png" alt="Ver-Tex Technology page" style="width:100%; display:block;">
-                </div>
-              </div>
-            </div>
-          </div>
-
+        <div class="web-tabs">
+          <button class="web-tab active" data-target="tab-web">Web</button>
+          <button class="web-tab" data-target="tab-email">Email</button>
         </div>
+
+        <div id="tab-web">
+          <div class="web-page-list">
+
+            <div class="web-page-item">
+              <div>
+                <div class="web-page-label">Brand partnership — athlete</div>
+                <h3 class="web-page-title">P.J. Washington x BEDGEAR</h3>
+                <p class="web-page-desc">Dedicated landing page for partnership with NBA star athlete P.J. Washington. Integrated campaign across CTV, paid social, email, and in-store retail.</p>
+                <a class="web-page-link" href="https://www.bedgear.com/pages/pj" target="_blank" rel="noopener">Open live page &#8599;</a>
+              </div>
+              <div class="browser-frame">
+                <div class="browser-chrome">
+                  <div class="browser-dots"><span class="dot dot-red"></span><span class="dot dot-yellow"></span><span class="dot dot-green"></span></div>
+                  <div class="browser-url">bedgear.com/pages/pj</div>
+                </div>
+                <div class="browser-viewport">
+                  <div class="browser-scroll">
+                    <img src="pj-washington1.jpg" alt="P.J. Washington x BEDGEAR landing page" style="width:100%; display:block;">
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="web-page-item">
+              <div>
+                <div class="web-page-label">Brand storytelling</div>
+                <h3 class="web-page-title">Sustainability</h3>
+                <p class="web-page-desc">Mission-driven brand page communicating BEDGEAR's commitment to responsible manufacturing and sustainable materials.</p>
+                <a class="web-page-link" href="https://www.bedgear.com/pages/sustainability" target="_blank" rel="noopener">Open live page &#8599;</a>
+              </div>
+              <div class="browser-frame">
+                <div class="browser-chrome">
+                  <div class="browser-dots"><span class="dot dot-red"></span><span class="dot dot-yellow"></span><span class="dot dot-green"></span></div>
+                  <div class="browser-url">bedgear.com/pages/sustainability</div>
+                </div>
+                <div class="browser-viewport">
+                  <div class="browser-scroll">
+                    <img src="sustainability1.png" alt="BEDGEAR Sustainability page" style="width:100%; display:block;">
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="web-page-item">
+              <div>
+                <div class="web-page-label">Technology landing page</div>
+                <h3 class="web-page-title">Ver-Tex Technology</h3>
+                <p class="web-page-desc">Complex technology, simple story. This page translates the technical aspects of a proprietary cooling technology into clear, benefit-driven copy that's easy to digest.</p>
+                <a class="web-page-link" href="https://www.bedgear.com/pages/ver-tex" target="_blank" rel="noopener">Open live page &#8599;</a>
+              </div>
+              <div class="browser-frame">
+                <div class="browser-chrome">
+                  <div class="browser-dots"><span class="dot dot-red"></span><span class="dot dot-yellow"></span><span class="dot dot-green"></span></div>
+                  <div class="browser-url">bedgear.com/pages/ver-tex</div>
+                </div>
+                <div class="browser-viewport">
+                  <div class="browser-scroll">
+                    <img src="ver-tex.png" alt="Ver-Tex Technology page" style="width:100%; display:block;">
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <div id="tab-email" style="display:none;">
+          <div class="web-page-item">
+            <div>
+              <div class="web-page-label">Email marketing</div>
+              <h3 class="web-page-title">Email campaigns</h3>
+              <p class="web-page-desc">Led copywriting for a revenue-driving email program that consistently exceeded targets as the brand's most lucrative D2C channel.</p>
+            </div>
+            <div style="display:flex; flex-direction:column; gap:1.5rem;">
+              <div class="browser-frame">
+                <div class="browser-chrome">
+                  <div class="browser-dots"><span class="dot dot-red"></span><span class="dot dot-yellow"></span><span class="dot dot-green"></span></div>
+                  <div class="browser-url">BEDGEAR email campaign</div>
+                </div>
+                <div class="browser-viewport">
+                  <div class="browser-scroll">
+                    <img src="BG-email-1.jpg" alt="BEDGEAR email campaign" style="width:100%; display:block;">
+                  </div>
+                </div>
+              </div>
+              <div class="browser-frame">
+                <div class="browser-chrome">
+                  <div class="browser-dots"><span class="dot dot-red"></span><span class="dot dot-yellow"></span><span class="dot dot-green"></span></div>
+                  <div class="browser-url">BEDGEAR email campaign</div>
+                </div>
+                <div class="browser-viewport">
+                  <div class="browser-scroll">
+                    <img src="BG-email-2.jpg" alt="BEDGEAR email campaign" style="width:100%; display:block;">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
       </div>
     </div>
   </div>
@@ -442,6 +485,17 @@
   </div>
 
   <script>
+    // Web / Email tabs
+    document.querySelectorAll('.web-tab').forEach(tab => {
+      tab.addEventListener('click', () => {
+        document.querySelectorAll('.web-tab').forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+        document.getElementById('tab-web').style.display = 'none';
+        document.getElementById('tab-email').style.display = 'none';
+        document.getElementById(tab.dataset.target).style.display = 'block';
+      });
+    });
+
     const hamburger = document.getElementById('hamburger');
     const mobileMenu = document.getElementById('mobile-menu');
     hamburger.addEventListener('click', () => { hamburger.classList.toggle('open'); mobileMenu.classList.toggle('open'); });
