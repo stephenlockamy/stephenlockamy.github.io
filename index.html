@@ -188,7 +188,7 @@
       .cat-tile:nth-child(1) .cat-title { font-size: 20px; }
       footer { padding: 1.5rem 1.25rem; flex-direction: column; align-items: flex-start; }
       .modal-backdrop { padding: 4rem 0 0; align-items: flex-start; }
-      .modal { border-radius: 12px 12px 0 0; min-height: 92vh; margin: 0; transform: translateY(40px); }
+      .modal { border-radius: 12px 12px 0 0; min-height: 92vh; margin: 0; transform: translateY(40px); -webkit-overflow-scrolling: auto; }
       .modal-backdrop.open .modal { transform: translateY(0); }
       .modal-stats { flex-wrap: wrap; }
       .stat { min-width: 50%; }
@@ -648,7 +648,7 @@
     ctrlClose.addEventListener('click', closeAll);
     ctrlTop.addEventListener('click', () => {
       document.querySelectorAll('.modal-backdrop.open').forEach(b => {
-        b.scrollTo({ top: 0, behavior: 'smooth' });
+        b.scrollTop = 0;
       });
     });
 
@@ -675,6 +675,8 @@
       if (!el) return;
       el.classList.add('open');
       document.body.style.overflow = 'hidden';
+      document.body.style.position = 'fixed';
+      document.body.style.width = '100%';
       modalControls.classList.add('visible');
       if (id === 'social' && window._igPending) {
         window._igPending = false;
@@ -699,6 +701,8 @@
     function closeAll() {
       backdrops.forEach(b => b.classList.remove('open'));
       document.body.style.overflow = '';
+      document.body.style.position = '';
+      document.body.style.width = '';
       modalControls.classList.remove('visible');
       const grid = document.getElementById('ig-grid');
       if (grid && !window._igPending) {
@@ -711,7 +715,6 @@
             wrap.dataset.src = src;
           }
         });
-        // Remove the Instagram script entirely so it stops running
         const igScript = document.querySelector('script[src*="instagram.com/embed"]');
         if (igScript) igScript.parentNode.removeChild(igScript);
         window.instgrm = undefined;
