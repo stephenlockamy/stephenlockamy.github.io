@@ -645,7 +645,6 @@
     const ctrlClose = document.getElementById('ctrl-close');
     const ctrlTop = document.getElementById('ctrl-top');
 
-    ctrlClose.addEventListener('click', closeAll);
     ctrlTop.addEventListener('click', () => {
       document.querySelectorAll('.modal-backdrop.open').forEach(b => {
         b.scrollTop = 0;
@@ -718,6 +717,7 @@
       }
     }
     document.querySelectorAll('.cat-tile[data-modal]').forEach(t => t.addEventListener('click', () => openModal(t.dataset.modal)));
+    ctrlClose.addEventListener('click', closeAll);
     closeButtons.forEach(b => b.addEventListener('click', closeAll));
     backdrops.forEach(b => b.addEventListener('click', e => { if (e.target === b) closeAll(); }));
     document.addEventListener('keydown', e => { if (e.key === 'Escape') { closeAll(); closeLightbox(); } });
