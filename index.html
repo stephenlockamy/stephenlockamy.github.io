@@ -42,13 +42,13 @@
     .cat-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; margin-top: 2.5rem; }
     .cat-tile { position: relative; overflow: hidden; cursor: pointer; aspect-ratio: 4/3; background: var(--gray-1); }
     .cat-tile:nth-child(1) { aspect-ratio: auto; grid-row: span 2; }
-    .cat-bg { position: absolute; inset: 0; transition: transform 0.6s ease; }
+    .cat-bg { position: absolute; inset: 0; transition: transform 0.6s ease; overflow: hidden; }
     .cat-tile:hover .cat-bg { transform: scale(1.04); }
     .bg-1 { background: #1e1b16; } .bg-2 { background: #7a3210; } .bg-3 { background: #181e24; } .bg-4 { background: #2a2520; } .bg-5 { background: #c8c5be; }
-    .cat-img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.6s ease; }
+    .cat-img { width: 100%; height: 100%; object-fit: cover; object-position: center; display: block; transition: transform 0.6s ease; }
     .cat-tile:hover .cat-img { transform: scale(1.04); }
-    .cat-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.75) 0%, transparent 55%); }
-    .cat-tile.light .cat-overlay { background: linear-gradient(to top, rgba(255,255,255,0.85) 0%, transparent 60%); }
+    .cat-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.82) 0%, rgba(0,0,0,0.55) 100%); }
+    .cat-tile.light .cat-overlay { background: linear-gradient(to top, rgba(255,255,255,0.85) 0%, rgba(255,255,255,0.55) 100%); }
     .cat-info { position: absolute; bottom: 0; left: 0; right: 0; padding: 1.25rem; }
     .cat-label { font-size: 10px; font-weight: 500; letter-spacing: 0.13em; text-transform: uppercase; color: var(--amber-light); margin-bottom: 4px; }
     .cat-tile.light .cat-label { color: var(--amber); }
@@ -240,7 +240,9 @@
         </div>
       </div>
       <div class="cat-tile" data-modal="social">
-        <div class="cat-bg bg-2"><!-- <img class="cat-img" src="social-cover.jpg" alt="Social"> --></div>
+        <div class="cat-bg bg-2">
+          <img class="cat-img" src="pj-washington1.jpg" alt="Organic Social">
+        </div>
         <div class="cat-overlay"></div>
         <div class="cat-info">
           <div class="cat-label">Social</div>
@@ -250,7 +252,9 @@
         </div>
       </div>
       <div class="cat-tile" data-modal="retail">
-        <div class="cat-bg bg-3"><!-- <img class="cat-img" src="retail-cover.jpg" alt="Retail"> --></div>
+        <div class="cat-bg bg-3">
+          <img class="cat-img" src="Retail-1.PNG" alt="Retail Activations">
+        </div>
         <div class="cat-overlay"></div>
         <div class="cat-info">
           <div class="cat-label">Brand experience</div>
@@ -260,7 +264,9 @@
         </div>
       </div>
       <div class="cat-tile" data-modal="web">
-        <div class="cat-bg bg-4"><!-- <img class="cat-img" src="web-cover.jpg" alt="Web"> --></div>
+        <div class="cat-bg bg-4">
+          <img class="cat-img" src="BG-email-1.jpg" alt="Web & Email">
+        </div>
         <div class="cat-overlay"></div>
         <div class="cat-info">
           <div class="cat-label">Digital marketing</div>
