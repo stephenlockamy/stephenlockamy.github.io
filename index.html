@@ -69,11 +69,20 @@
     .modal-backdrop.open .modal { transform: translateY(0); }
     .modal-wide { max-width: 1100px; }
     .modal-header { background: var(--black); padding: 2.5rem 2.5rem 2rem; position: relative; border-radius: 4px 4px 0 0; }
-    .modal-close {
+
+    /* Sticky modal controls */
+    .modal-controls {
       position: fixed;
       top: 1.25rem;
       right: 1.25rem;
       z-index: 300;
+      display: none;
+      flex-direction: column;
+      gap: 8px;
+      align-items: center;
+    }
+    .modal-backdrop.open .modal-controls { display: flex; }
+    .modal-ctrl-btn {
       background: rgba(17,17,16,0.85);
       border: 1px solid #444;
       color: var(--white);
@@ -83,8 +92,18 @@
       cursor: pointer;
       display: flex; align-items: center; justify-content: center;
       transition: background 0.2s;
+      line-height: 1;
     }
-    .modal-close:hover { background: rgba(17,17,16,1); }
+    .modal-ctrl-btn:hover { background: rgba(17,17,16,1); }
+    .modal-close { display: none; }
+
+    /* Fade left column on web/email scroll */
+    .web-page-item > div:first-child {
+      position: sticky;
+      top: 1rem;
+      transition: opacity 0.3s ease;
+    }
+    .web-page-item > div:first-child.faded { opacity: 0.15; }
     .modal-eyebrow { font-size: 10px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--amber); margin-bottom: 10px; }
     .modal-title { font-family: var(--serif); font-size: clamp(28px, 4vw, 42px); font-weight: 500; color: var(--white); margin-bottom: 1rem; }
     .modal-desc { font-size: 14px; font-weight: 300; color: var(--gray-2); max-width: 600px; line-height: 1.75; }
@@ -263,11 +282,17 @@
     </div>
   </div>
 
+  <!-- STICKY MODAL CONTROLS -->
+  <div class="modal-controls" id="modal-controls">
+    <button class="modal-ctrl-btn" id="ctrl-close" aria-label="Close">&#x2715;</button>
+    <button class="modal-ctrl-btn" id="ctrl-top" aria-label="Back to top" title="Back to top">&#8593;</button>
+  </div>
+
   <!-- PAID MODAL -->
   <div class="modal-backdrop" id="modal-paid">
     <div class="modal">
       <div class="modal-header">
-        <button class="modal-close">&#x2715;</button>
+
         <p class="modal-eyebrow">Campaign work</p>
         <h2 class="modal-title">Paid media</h2>
         <p class="modal-desc">Full-funnel paid campaigns across Meta and digital channels — from concept and copy through creative direction. Every campaign built around a clear audience, a sharp message, and a measurable outcome.</p>
@@ -295,7 +320,7 @@
   <div class="modal-backdrop" id="modal-social">
     <div class="modal">
       <div class="modal-header">
-        <button class="modal-close">&#x2715;</button>
+
         <p class="modal-eyebrow">Social</p>
         <h2 class="modal-title">Organic social</h2>
         <p class="modal-desc">Where retail is the showroom, social is the playground. A space to build the brand, test concepts, and push bold creative. I planned and scheduled content, developed concepts, supported production, and wrote copy to ensure a consistent brand voice across all social channels.</p>
@@ -327,7 +352,7 @@
   <div class="modal-backdrop" id="modal-retail">
     <div class="modal">
       <div class="modal-header">
-        <button class="modal-close">&#x2715;</button>
+
         <p class="modal-eyebrow">Brand experience</p>
         <h2 class="modal-title">Retail activations</h2>
         <p class="modal-desc">Bedding is a sleepy category in a traditionally boring industry. <em>Yawn.</em> That's not fun. I wrote copy and assisted in concept development to create a bold and provocative showroom presence that captures attention, stands out against the competition, and challenges the way people think about sleep.</p>
@@ -349,7 +374,7 @@
   <div class="modal-backdrop" id="modal-web">
     <div class="modal modal-wide">
       <div class="modal-header">
-        <button class="modal-close">&#x2715;</button>
+
         <p class="modal-eyebrow">Digital marketing</p>
         <h2 class="modal-title">Web &amp; Email</h2>
         <p class="modal-desc">Email? Me mail. I lead copywriting and brand storytelling across email campaigns designed to drive revenue and landing pages built to convert.</p>
@@ -512,7 +537,7 @@
   <div class="modal-backdrop" id="modal-spec">
     <div class="modal">
       <div class="modal-header">
-        <button class="modal-close">&#x2715;</button>
+
         <p class="modal-eyebrow">Concept work</p>
         <h2 class="modal-title">Spec work</h2>
         <p class="modal-desc">Independent concepts developed outside of client briefs — campaigns, brand identities, and content built to explore new ideas and demonstrate range.</p>
@@ -537,6 +562,26 @@
         document.getElementById('tab-web').style.display = 'none';
         document.getElementById('tab-email').style.display = 'none';
         document.getElementById(tab.dataset.target).style.display = 'block';
+      });
+    });
+
+    // Modal controls
+    const ctrlClose = document.getElementById('ctrl-close');
+    const ctrlTop = document.getElementById('ctrl-top');
+
+    ctrlClose.addEventListener('click', closeAll);
+    ctrlTop.addEventListener('click', () => {
+      document.querySelectorAll('.modal-backdrop.open').forEach(b => { b.scrollTop = 0; });
+    });
+
+    // Left column fade on scroll
+    document.querySelectorAll('.modal-backdrop').forEach(backdrop => {
+      backdrop.addEventListener('scroll', () => {
+        const leftCols = backdrop.querySelectorAll('.web-page-item > div:first-child');
+        leftCols.forEach(col => {
+          const rect = col.getBoundingClientRect();
+          col.classList.toggle('faded', rect.top < 80);
+        });
       });
     });
 
