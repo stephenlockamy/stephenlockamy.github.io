@@ -252,7 +252,7 @@
         </div>
       </div>
       <div class="cat-tile" data-modal="retail">
-        <div class="cat-bg bg-3"><img class="cat-img" src="Retail-5.PNG" alt="Retail activations"></div>
+        <div class="cat-bg bg-3"></div>
         <div class="cat-overlay"></div>
         <div class="cat-info">
           <div class="cat-label">Brand experience</div>
@@ -669,8 +669,6 @@
       document.body.style.overflow = '';
     }
     document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
-
-    if (history.scrollRestoration) { history.scrollRestoration = 'manual'; }
 
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
       anchor.addEventListener('click', function(e) {
