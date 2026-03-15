@@ -67,7 +67,7 @@
     .footer-links a:hover { color: var(--black); }
     .modal-backdrop { position: fixed; inset: 0; background: rgba(10,10,8,0.65); z-index: 200; display: flex; align-items: flex-start; justify-content: center; padding: 3rem 1.5rem; opacity: 0; pointer-events: none; transition: opacity 0.3s ease; overflow-y: auto; }
     .modal-backdrop.open { opacity: 1; pointer-events: all; }
-    .modal { background: var(--white); width: 100%; max-width: 1000px; border-radius: 4px; overflow: visible; transform: translateY(20px); transition: transform 0.35s ease; margin: auto; }
+    .modal { background: var(--white); width: 100%; max-width: 1000px; border-radius: 4px; overflow: hidden; transform: translateY(20px); transition: transform 0.35s ease; margin: auto; }
     .modal-backdrop.open .modal { transform: translateY(0); }
     .modal-wide { max-width: 1100px; }
     .modal-header { background: var(--black); padding: 2.5rem 2.5rem 2rem; position: relative; border-radius: 4px 4px 0 0; }
@@ -662,8 +662,6 @@
       document.getElementById('lightbox').style.display = 'none';
       document.body.style.overflow = '';
     }
-    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
-
     const hamburger = document.getElementById('hamburger');
     const mobileMenu = document.getElementById('mobile-menu');
     hamburger.addEventListener('click', () => { hamburger.classList.toggle('open'); mobileMenu.classList.toggle('open'); });
@@ -700,11 +698,29 @@
       backdrops.forEach(b => b.classList.remove('open'));
       document.body.style.overflow = '';
       modalControls.classList.remove('visible');
+      // Clean up Instagram embed script so it stops running in background
+      const igScript = document.querySelector('script[src*="instagram.com/embed"]');
+      if (igScript) igScript.parentNode.removeChild(igScript);
+      window.instgrm = undefined;
+      window._igPending = true;
+      // Reset placeholders
+      const grid = document.getElementById('ig-grid');
+      if (grid) {
+        grid.querySelectorAll('.ig-wrap:not(.ig-placeholder)').forEach(wrap => {
+          const bq = wrap.querySelector('blockquote');
+          if (bq) {
+            const src = bq.getAttribute('data-instgrm-permalink');
+            wrap.innerHTML = `<a href="${src}" target="_blank" style="display:flex;align-items:center;justify-content:center;width:100%;height:200px;background:#fafafa;border:1px solid #eee;border-radius:3px;text-decoration:none;color:#999;font-size:12px;">View on Instagram</a>`;
+            wrap.classList.add('ig-placeholder');
+            wrap.dataset.src = src;
+          }
+        });
+      }
     }
     document.querySelectorAll('.cat-tile[data-modal]').forEach(t => t.addEventListener('click', () => openModal(t.dataset.modal)));
     closeButtons.forEach(b => b.addEventListener('click', closeAll));
     backdrops.forEach(b => b.addEventListener('click', e => { if (e.target === b) closeAll(); }));
-    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeAll(); });
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') { closeAll(); closeLightbox(); } });
   </script>
 
   <!-- ABOUT SECTION -->
