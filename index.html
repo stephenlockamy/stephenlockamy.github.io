@@ -357,6 +357,7 @@
         <div class="web-tabs">
           <button class="web-tab active" data-page="pj">PJ Washington x BEDGEAR</button>
           <button class="web-tab" data-page="sustainability">Sustainability</button>
+          <button class="web-tab" data-page="vertex">Ver-Tex Technology</button>
         </div>
         <div class="web-page-list">
 
@@ -400,6 +401,26 @@
             </div>
           </div>
 
+          <div class="web-page-item" id="web-page-vertex" style="display:none;">
+            <div>
+              <div class="web-page-label">Technology landing page</div>
+              <h3 class="web-page-title">Ver-Tex Technology</h3>
+              <p class="web-page-desc">A technology landing page simplified to highlight a cooling fabric technology without overwhelming or confusing the audience with overly technical language.</p>
+              <a class="web-page-link" href="https://www.bedgear.com/pages/ver-tex" target="_blank" rel="noopener">Open live page &#8599;</a>
+            </div>
+            <div class="browser-frame">
+              <div class="browser-chrome">
+                <div class="browser-dots"><span class="dot dot-red"></span><span class="dot dot-yellow"></span><span class="dot dot-green"></span></div>
+                <div class="browser-url">bedgear.com/pages/ver-tex</div>
+              </div>
+              <div class="browser-viewport">
+                <div class="browser-scroll">
+                  <img src="ver-tex.png" alt="Ver-Tex Technology page" style="width:100%; display:block;">
+                </div>
+              </div>
+            </div>
+          </div>
+
         </div>
       </div>
     </div>
@@ -427,12 +448,12 @@
 
   <script>
     // Web page tabs
-    document.querySelectorAll('.web-tab').forEach((tab, i) => {
+    document.querySelectorAll('.web-tab').forEach((tab) => {
       tab.addEventListener('click', () => {
         document.querySelectorAll('.web-tab').forEach(t => t.classList.remove('active'));
         document.querySelectorAll('.web-page-item').forEach(p => p.style.display = 'none');
         tab.classList.add('active');
-        document.querySelectorAll('.web-page-item')[i].style.display = 'grid';
+        document.getElementById('web-page-' + tab.dataset.page).style.display = 'grid';
       });
     });
 
