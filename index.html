@@ -147,6 +147,8 @@
     .contact-links { display: flex; gap: 1.5rem; align-items: center; }
     .contact-links a { font-size: 13px; color: var(--amber); text-decoration: none; border-bottom: 1px solid rgba(201,126,8,0.3); padding-bottom: 1px; transition: border-color 0.2s; }
     .contact-links a:hover { border-color: var(--amber); }
+    #ce a { font-size: 13px; color: var(--amber); text-decoration: none; border-bottom: 1px solid rgba(201,126,8,0.3); padding-bottom: 1px; transition: border-color 0.2s; }
+    #ce a:hover { border-color: var(--amber); }
     .contact-sep { width: 1px; height: 14px; background: var(--gray-2); }
     body:has(.modal-backdrop.open) { overflow: hidden; }
     .instagram-media { font-size: 14px !important; }
@@ -611,6 +613,17 @@
     }
 
     document.querySelectorAll('.cat-tile[data-modal]').forEach(t => t.addEventListener('click', () => openModal(t.dataset.modal)));
+
+    // Build email at runtime to bypass Cloudflare email obfuscation
+    window.addEventListener('DOMContentLoaded', () => {
+      const ce = document.getElementById('ce');
+      if (ce) {
+        const a = document.createElement('a');
+        a.href = ['mail', 'to:', 'stepheniswriting', '@', 'gmail.com'].join('');
+        a.textContent = ['stepheniswriting', '@', 'gmail.com'].join('');
+        ce.appendChild(a);
+      }
+    });
     ctrlClose.addEventListener('click', closeAll);
     backdrops.forEach(b => b.addEventListener('click', e => { if (e.target === b) closeAll(); }));
     document.addEventListener('keydown', e => { if (e.key === 'Escape') { closeAll(); closeLightbox(); } });
@@ -633,6 +646,8 @@
   <div class="contact-strip" id="contact">
     <p class="contact-line">That's my story. Let's tell <em>yours.</em></p>
     <div class="contact-links">
-      <a href="/cdn-cgi/l/email-protection#32414657425a575c5b4145405b465b5c5572555f535b5e1c515d5f"><span class="__cf_email__" data-cfemail="9deee9f8edf5f8f3f4eeeaeff4e9f4f3faddfaf0fcf4f1b3fef2f0">[email&#160;protected]</span></a>
+      <span id="ce"></span>
       <div class="contact-sep"></div>
-      <a href="https://www.linkedin.com/in/stephen-britt" target="_blank"
+      <a href="https://www.linkedin.com/in/stephen-britt" target="_blank" rel="noopener">LinkedIn</a>
+    </div>
+  </div>
